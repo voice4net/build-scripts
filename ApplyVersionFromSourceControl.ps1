@@ -10,6 +10,11 @@
 		Optionally checks in any changes made to the assembly info files. The default behavior is to check in changes.
 		Changes the build number to match the version number applied to the assemblies.
 
+		Author: Brad Foster
+		Company: Voice4Net
+		Web Page: www.voice4net.com
+		License: Apache
+
 	.DESCRIPTION
 
 		This script assumes that your .NET solution contains an assembly info file, named SharedAssemblyInfo.cs, that is
@@ -24,10 +29,10 @@
 			- AssemblyVersion
 			- AssemblyFileVersion
 			- AssemblyInformationalVersion
-			
+
 		Each project can still have it's own AssemblyInfo.cs file, but it should not contain any version number attributes,
 		such as AssemblyVersion, AssemblyFileVersion, or AssemblyInformationalVersion.
-		
+
 		My AssemblyInfo.cs files contain the following attributes:
 			- AssemblyTitle
 			- AssemblyCulture
@@ -81,10 +86,6 @@
 		powershell.exe -File .\ApplyVersionFromSourceControl.ps1 -DoNotIncrement
 	.EXAMPLE
 		powershell.exe -File .\ApplyVersionFromSourceControl.ps1 -IncrementBuildNumber -DoNotCheckIn
-	.NOTES
-		Author: Brad Foster
-		Company: Voice4Net
-		Web Page: www.voice4net.com
 	.LINK
 		https://github.com/voice4net/build-scripts/blob/master/ApplyVersionFromSourceControl.ps1
 #>
