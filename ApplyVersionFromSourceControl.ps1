@@ -5,30 +5,48 @@
 
 		Powershell script to be used as the pre-build script in a build definition on Team Foundation Server.
 		Applies the version number from SharedAssemblyInfo.cs to the assemblies.
-		Optionally increments the build or revision number. The default behavior is to increment the build number and not increment the revision number.
+		Optionally increments the build or revision number. The default behavior is to increment the build number
+		and not increment the revision number.
 		Optionally checks in any changes made to the assembly info files. The default behavior is to check in changes.
 		Changes the build number to match the version number applied to the assemblies.
 
 	.DESCRIPTION
 
-		This script assumes that your .NET solution contains an assembly info file, named SharedAssemblyInfo.cs, that is shared across all of the projects as a linked file.
+		This script assumes that your .NET solution contains an assembly info file, named SharedAssemblyInfo.cs, that is
+		shared across all of the projects as a linked file.
 		This layout is described in detail here: http://blogs.msdn.com/b/jjameson/archive/2009/04/03/shared-assembly-info-in-visual-studio-projects.aspx
 		The SharedAssemblyInfo.cs file should at the very least contain an AssemblyVersion attribute.
-		My SharedAssemblyInfo.cs file contains the following attributes: AssemblyCompany, AssemblyProduct, AssemblyCopyright, AssemblyTrademark, AssemblyVersion, AssemblyFileVersion, AssemblyInformationalVersion
-		Each project can still have it's own AssemblyInfo.cs file, but it should not contain any version number attributes (AssemblyVersion, AssemblyFileVersion, or AssemblyInformationalVersion).
-		My AssemblyInfo.cs files contain the following attributes: AssemblyTitle, AssemblyCulture, Guid
+		My SharedAssemblyInfo.cs file contains the following attributes:
+			- AssemblyCompany
+			- AssemblyProduct
+			- AssemblyCopyright
+			- AssemblyTrademark
+			- AssemblyVersion
+			- AssemblyFileVersion
+			- AssemblyInformationalVersion
+			
+		Each project can still have it's own AssemblyInfo.cs file, but it should not contain any version number attributes,
+		such as AssemblyVersion, AssemblyFileVersion, or AssemblyInformationalVersion.
+		
+		My AssemblyInfo.cs files contain the following attributes:
+			- AssemblyTitle
+			- AssemblyCulture
+			- Guid
 
 		The script locates the SharedAssemblyInfo.cs file after the TFS Build Server has downloaded all of the source files.
-		Then it extracts the current version number from it.
-		Then it optionally increments the version number and overwrites that file with the new version number.
-		It also looks for files named app.rc and overwrites the version number there as well. Version files in C++ projects are named app.rc.
+		Then it extracts the current version number from it. Then it optionally increments the version number and overwrites
+		that file with the new version number. It also looks for files named app.rc (version files in C++ projects are named
+		app.rc) and overwrites the version number there	as well.
 
-		After it has edited all of the assembly info files that contain version numbers, it checks those changes back into source control.
+		After it has edited all of the assembly info files that contain version numbers,
+		it checks those changes back into source control.
 
 		As TFS builds the assemblies the version number applied will match the new version number.
 
-		The name of the build in the build definition should be named something that contains a stubbed out version number, e.g. $(BuildDefinitionName)_$(Date:yyyyMMddHHmmss)_1.0.0.0.
-		The script will update the build number as the build is running so that the build number matches the version from source control as well as the version applied to the assemblies.
+		The name of the build in the build definition should be named something that contains a stubbed out version number,
+		e.g. $(BuildDefinitionName)_$(Date:yyyyMMddHHmmss)_1.0.0.0. The script will update the build number as the build is
+		running so that the build number matches the version from source control as well as the version applied to the
+		assemblies.
 
 		To use this script:
 			1. Check it into source control
