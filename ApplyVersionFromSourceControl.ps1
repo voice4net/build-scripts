@@ -86,7 +86,7 @@
 		Company: Voice4Net
 		Web Page: www.voice4net.com
 	.LINK
-		http://github.com/voice4net/build-scripts/ApplyVersionFromSourceControl.ps1
+		https://github.com/voice4net/build-scripts/blob/master/ApplyVersionFromSourceControl.ps1
 #>
 
 [CmdletBinding(PositionalBinding=$false)]
